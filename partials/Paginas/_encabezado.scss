@@ -1,0 +1,27 @@
+.header{
+@include flex (flex,row,wrap,space-between, center);
+background-image: linear-gradient(-90deg,#ff1a37 40%, #3e257a 60% )
+
+}
+    
+.header .nav{
+@include flex (flex,row,wrap,space-between, center);
+height: 4em;
+padding: 0.8em 0em;
+margin-left: 7em
+
+
+}
+.header .ul{
+    @include flex (flex,row,wrap,space-between, center);
+    
+    }
+.header .li{
+    margin: 0em 1em;
+    padding: 0em 1.5em;
+
+}
+.header .a{
+    color: #fff;
+    font-size: calc(2.1vh);
+}
