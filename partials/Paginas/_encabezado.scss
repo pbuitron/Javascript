@@ -1,24 +1,40 @@
 
 body{
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='2500' height='1200' preserveAspectRatio='none' viewBox='0 0 2500 1200'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1146%26quot%3b)' fill='none'%3e%3crect width='2500' height='1200' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M -893.5936893581257%2c386 C -726.79%2c441 -393.19%2c628.4 -59.59368935812578%2c661 C 274.01%2c693.6 440.81%2c528.4 774.4063106418743%2c549 C 1108.01%2c569.6 1274.81%2c787.8 1608.4063106418741%2c764 C 1942.01%2c740.2 2264.09%2c449 2442.4063106418744%2c430 C 2620.73%2c411 2488.48%2c621.2 2500%2c669' stroke='rgba(51%2c 121%2c 194%2c 0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -1436.1208433072225%2c515 C -1269.32%2c572.6 -935.72%2c792.4 -602.1208433072225%2c803 C -268.52%2c813.6 -101.72%2c592.6 231.87915669277754%2c568 C 565.48%2c543.4 732.28%2c700.4 1065.8791566927775%2c680 C 1399.48%2c659.6 1613.05%2c476.6 1899.8791566927775%2c466 C 2186.7%2c455.4 2379.98%2c594.8 2500%2c627' stroke='rgba(51%2c 121%2c 194%2c 0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -179.34434890230466%2c571 C -12.54%2c582.6 321.06%2c626.8 654.6556510976953%2c629 C 988.26%2c631.2 1155.06%2c567 1488.6556510976952%2c582 C 1822.26%2c597 1989.06%2c739.2 2322.655651097695%2c704 C 2656.26%2c668.8 3121.19%2c394 3156.655651097695%2c406 C 3192.12%2c418 2631.33%2c692.4 2500%2c764' stroke='rgba(51%2c 121%2c 194%2c 0.58)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1146'%3e%3crect width='2500' height='1200' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");}
-.padre{
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    color:antiquewhite;
-    
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
 }
-.logo{
-  width: 5rem;  
-}
-.titulo{
-    font-size: 3rem;
-    font-weight: 500;
+
+.navbar{
+    background-color: #004d7a;
 
 }
-svg{
-    height: 100vh;
+.navbar-brand{
+    font-weight: 700;
+    font-size: 2em;
+    color: #fff;
 }
-header{
-    z-index: 11;
+
+.nav-link, .dropdown-item,.nav-link{
+    font-size: 1.8em;
+    color: #fff;
+   
+}
+
+.dropdown-menu{
+    background-color: #004d7a;
+}
+.dropdown-item{
+    margin: 0.2rem;
+
+}
+
+li{
+    margin: 1.5rem
+}
+.btn {
+    width: 15rem;
+    border-radius: 0.5rem;
+}
+
+.dropdown-menu{
+    border-radius: 1rem;
 }
