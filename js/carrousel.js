@@ -36,14 +36,67 @@ ArrayEntradas.push(evento08)
 ArrayEntradas.push(evento09)
 ArrayEntradas.push(evento10)
 
-const carrusel = document.getElementById(`carruselDOM`)
-ArrayEntradas.forEach (evento =>
-    {
-        carrusel.innerHTML += 
-        `<div class="carousel-item">
-        <img src="${evento.img}" class="d-block w-100" alt="...">
-        </div>` ;
+function carrusel() {
+    
+
+let carrusel = document.getElementById(`carrusel`)
+carrusel.innerHTML = `
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" id="carruselDOM">
+        <div class="carousel-item active">
+            <img src="${evento01.img}" class="d-block w-100" alt=" ${evento01.descripcion}">
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+`
+let contenedorEventos = document.getElementById(`carruselDOM`)
+ArrayEntradas.forEach(eventos=>{
+    contenedorEventos.innerHTML += `
+        <div class="carousel-item" id="event${eventos.item}" ->
+        <img src="${eventos.img}" class="d-block w-100" alt="${eventos.descripcion}">
+        </div>
         
-    }
+        `;
+        
+      }
+    )
+}
+
+
+
+
+
+carrusel()
+
+let cards = document.getElementById(`cards`)
+ArrayEntradas.forEach(conciertos =>{
+    cards.innerHTML += `
+    <div class="col">
+    <div class="card">
+      <img src="${conciertos.img} " class="card-img-top" alt="${conciertos.descripcion} ">
+      <div class="card-body">
+      <h1 class="cardTexto"><strong>${conciertos.lugarDePresentacion} - ${conciertos.provincia} </strong> </h1>
+        <h5 class="card-title text-success"> <strong> ${conciertos.descripcion}</strong> </h5>
+        <p class="card-text"> ${conciertos.fechaDePresentacion}</p>
+        <p class="card-text"> ${conciertos.categoria}</p>
+        <button class="button" id="btn${conciertos.item}"> #COMPRAR
+        </button>
+        </div>
+
+    </div>
+    `
+}
 
 )
+
+

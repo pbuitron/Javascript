@@ -1,0 +1,39 @@
+.card-img-top{
+height: 14rem;
+border-radius:0.8rem;
+}
+
+.cardTexto{
+    font-weight: 600;
+    font-size: x-small;
+}
+
+.card{
+    
+    border-radius: 0.8rem;
+    box-shadow: 19px 15px 34px -4px rgba(0,0,0,0.28);
+-webkit-box-shadow: 19px 15px 34px -4px rgba(0,0,0,0.28);
+-moz-box-shadow: 19px 15px 34px -4px rgba(0,0,0,0.28)
+}
+
+.row{
+    display: flex;
+}
+.col{
+    justify-content: center;
+}
+.button {
+    padding: 0.6em 1em;
+    border: 4px solid #fa725a;
+    transition: ease-in-out 0.3s;
+    background-color: transparent;
+    color: #fa725a;
+    font-weight: bolder;
+    font-size: 16px;
+   }
+   
+   .button:hover {
+    transform: scale(1.2) rotate(10deg);
+    background-color: #fa725a;
+    color: white;
+   }
