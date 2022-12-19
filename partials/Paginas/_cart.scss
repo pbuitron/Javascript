@@ -1,0 +1,37 @@
+.titulocart {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 1rem;
+    color: #fff;
+    font-size:x-large;
+    background-color: #004d7a;
+}
+
+.tarjetas {
+        background:#fff;
+    border-radius: 1rem;
+    min-height: 20rem;
+   
+    
+}
+.resumen{
+    text-align: center;
+    font-size: small;
+    font-weight: 500;
+    
+}
+
+.botonCarrito{
+   width: 3rem; 
+}
+.contador {
+    width: 3rem;
+    text-align: center;
+    font-size: medium;
+}
+
+.eliminar{
+    font-family: map-get($Font-family, $text-medium);
+    font-size: map-get($Font-Sizes , $text-base );
+    color: #004d7a;
+}

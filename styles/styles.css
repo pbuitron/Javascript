@@ -229,7 +229,7 @@ li {
   border-radius: 0.8rem;
 }
 
-.cardTexto {
+.cardtexto {
   font-weight: 600;
   font-size: x-small;
 }
@@ -263,4 +263,39 @@ li {
   transform: scale(1.2) rotate(10deg);
   background-color: #fa725a;
   color: white;
+}
+
+.titulocart {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #fff;
+  font-size: x-large;
+  background-color: #004d7a;
+}
+
+.tarjetas {
+  background: #fff;
+  border-radius: 1rem;
+  min-height: 20rem;
+}
+
+.resumen {
+  text-align: center;
+  font-size: small;
+  font-weight: 500;
+}
+
+.botonCarrito {
+  width: 3rem;
+}
+
+.contador {
+  width: 3rem;
+  text-align: center;
+  font-size: medium;
+}
+
+.eliminar {
+  color: #004d7a;
 }/*# sourceMappingURL=styles.css.map */

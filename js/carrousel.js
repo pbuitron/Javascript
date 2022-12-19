@@ -1,15 +1,16 @@
 class Entradas {
-    constructor(item, descripcion, lugarDePresentacion, provincia, categoria, fechaDePresentacion, stock, precio, img) {
-        this.item = item
-        this.descripcion = descripcion
-        this.lugarDePresentacion = lugarDePresentacion
-        this.provincia = provincia
-        this.categoria = categoria
-        this.fechaDePresentacion = fechaDePresentacion
-        this.stock = stock
-        this.precio = precio
-        this.img = img
-    }
+  constructor(item, descripcion, lugarDePresentacion, provincia, categoria, fechaDePresentacion, stock, precio, img) {
+    this.item = item
+    this.descripcion = descripcion
+    this.lugarDePresentacion = lugarDePresentacion
+    this.provincia = provincia
+    this.categoria = categoria
+    this.fechaDePresentacion = fechaDePresentacion
+    this.stock = stock
+    this.precio = precio
+    this.img = img
+    this.cantidad = 1
+  }
 }
 
 let ArrayEntradas = []
@@ -36,11 +37,15 @@ ArrayEntradas.push(evento08)
 ArrayEntradas.push(evento09)
 ArrayEntradas.push(evento10)
 
-function carrusel() {
-    
 
-let carrusel = document.getElementById(`carrusel`)
-carrusel.innerHTML = `
+let carrito = [];
+
+
+function carrusel() {
+
+
+  let carrusel = document.getElementById(`carrusel`)
+  carrusel.innerHTML = `
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" id="carruselDOM">
         <div class="carousel-item active">
@@ -59,44 +64,154 @@ carrusel.innerHTML = `
   </button>
 </div>
 `
-let contenedorEventos = document.getElementById(`carruselDOM`)
-ArrayEntradas.forEach(eventos=>{
+  let contenedorEventos = document.getElementById(`carruselDOM`)
+  ArrayEntradas.forEach(eventos => {
     contenedorEventos.innerHTML += `
         <div class="carousel-item" id="event${eventos.item}" ->
         <img src="${eventos.img}" class="d-block w-100" alt="${eventos.descripcion}">
         </div>
         
         `;
-        
-      }
-    )
+
+  }
+  )
+}
+
+function cards() {
+  // Declarar una variable para almacenar el elemento padre donde se añadirán los elementos generados dinámicamente
+  let parentElement = document.getElementById('cards');
+
+  ArrayEntradas.forEach(conciertos => {
+    // Crear un elemento div para cada entrada
+    let entryElement = document.createElement('div');
+    entryElement.classList.add('col');
+
+    // Generar el HTML para la entrada y asignarlo al elemento recién creado
+    entryElement.innerHTML = `
+    <div class="card">
+      <img src="${conciertos.img}" class="card-img-top" alt="${conciertos.descripcion}">
+      <div class="card-body">
+        <h1 class="cardtexto"><strong>${conciertos.lugarDePresentacion} - ${conciertos.provincia}</strong> </h1>
+        <h5 class="card-title text-success"><strong> ${conciertos.descripcion}</strong></h5>
+        <p class="card-text">${conciertos.fechaDePresentacion}</p>
+        <p class="card-text">${conciertos.categoria}</p>
+        <button class="button" id = "btn${conciertos.item}">#Agregar al Carrito</button>
+      </div>
+    </div>
+    `;
+    // Añadir el elemento recién creado al elemento padre
+    parentElement.appendChild(entryElement);
+
+    // Añadir un manejador de evento al botón dentro del elemento recién creado
+    let button = document.getElementById(`btn${conciertos.item}`);
+    button.addEventListener('click', () => {
+      agregarAlCarrito(conciertos.item);
+    });
+
+
+  })
 }
 
 
 
+function agregarAlCarrito(item) {
+  const productoEnCarrito = carrito.find(concierto => concierto.item === item);
+  productoEnCarrito
+    ? productoEnCarrito.cantidad++
+    : carrito.push(ArrayEntradas.find(concierto => concierto.item === item));
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  console.log(carrito);
+  // calcularTotal();
+}
+function mostrarCarrito() {
+  
+  contenedorCarrito.innerHTML = ""
+
+  carrito.forEach(concierto => {
+    const cardcarrito = document.getElementById(`contenedorCarrito`)
+    // cardcarrito.classList.add("card", "mb-3");
+    cardcarrito.innerHTML += `
+      <h2 class="card-header display-6 "><strong>${concierto.descripcion} </strong></h2>
+      <div class="card-body">
+          <img src =${concierto.img} class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+
+          <h5 class="card-title mt-5"> ${concierto.lugarDePresentacion} </h5>
+          <h6 class="card-subtitle text-muted mt-3"> ${concierto.fechaDePresentacion} </h6>
+          <div>
+              <div class="btn-group contenedorBotones mt-4" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-primary botonCarrito bti">-</button>
+                  <span class="contador"> ${concierto.cantidad} </span>
+                  <button type="button" class="btn btn-primary botonCarrito btd">+</button>
+
+
+              </div>
+              <br>
+              <h5 class="mt-3 "><a class="eliminar" href="">eliminar</a> </h5>
+          </div>
+      </div>`
+
+
+
+    //Eliminar productos del carrito:
+
+    // const boton = document.getElementById(`eliminar${concierto.item}`);
+    // boton.addEventListener("click", () => {
+    //   eliminarDelCarrito(concierto.item);
+    // })
+  })
+  // calcularTotal();
+}
 
 
 carrusel()
+cards()
 
-let cards = document.getElementById(`cards`)
-ArrayEntradas.forEach(conciertos =>{
+
+
+if (localStorage.getItem("carrito")) {
+  carrito = JSON.parse(localStorage.getItem("carrito"));
+}
+
+
+const contenedorCarrito = document.getElementById(`contenedorCarrito`)
+const verCarrito = document.getElementById(`verCarrito`)
+
+verCarrito.addEventListener(`click`, () => {
+  mostrarCarrito();
+})
+
+
+console.log(carrito)
+
+
+/*
+function cards() {
+
+
+  let cards = document.getElementById(`cards`)
+  ArrayEntradas.forEach(conciertos => {
     cards.innerHTML += `
     <div class="col">
     <div class="card">
       <img src="${conciertos.img} " class="card-img-top" alt="${conciertos.descripcion} ">
       <div class="card-body">
-      <h1 class="cardTexto"><strong>${conciertos.lugarDePresentacion} - ${conciertos.provincia} </strong> </h1>
+      <h1 class="cardtexto"><strong>${conciertos.lugarDePresentacion} - ${conciertos.provincia} </strong> </h1>
         <h5 class="card-title text-success"> <strong> ${conciertos.descripcion}</strong> </h5>
         <p class="card-text"> ${conciertos.fechaDePresentacion}</p>
         <p class="card-text"> ${conciertos.categoria}</p>
-        <button class="button" id="btn${conciertos.item}"> #COMPRAR
+        <button class="button" id="btn${conciertos.item}"> #Agregar al Carrito
         </button>
         </div>
+    </div>    `
 
-    </div>
-    `
+    const boton = document.getElementById(`btn${conciertos.item}`);
+    boton.addEventListener(`click`, () => {
+      agregarAlCarrito(conciertos.item)
+    })
+
+  }
+
+  )
+
 }
-
-)
-
-
+*/
