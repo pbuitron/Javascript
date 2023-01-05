@@ -1,119 +1,175 @@
-//Se declaran las variables para el carrito de compras
+// Importar archivos para carrusel mediante Fetch
 
-let comprar, continuar, decision, producto, totalcompras;
+const baseDeDatos = "../json/datos.json";
+const arrayEntradas = [];
 
-comprar = true;
-continuar = true;
-decision = true;
-producto = 0;
-totalcompras = 0;
+const contenedorCarrito = document.getElementById(`contenedorCarrito`)
+const verCarrito = document.getElementById(`verCarrito`)
 
-let ArrayProductos = [];
-let carrito =[];
-class Productos{
-    constructor (id,descripcion,marca, categoria,precio,stock){
-        this.id=id
-        this.descripcion=descripcion
-        this.marca=marca
-        this.categoria=categoria
-        this.precio=precio
-        this.stock=stock
+fetch(baseDeDatos)
+    .then((respuesta) => respuesta.json())
+    .then((datos) => {
+        arrayEntradas.push(datos)
+        console.log(arrayEntradas)
+        carrusel(datos)
+        cards(datos)
+        
+    })
+    .catch(error => console.log(error))
+
+
+//Funcion para crear un carrusel con los objetos importados por el Fetch
+function carrusel(array) {
+    let carrusel = document.getElementById(`carrusel`)
+    carrusel.innerHTML = `
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" id="carruselDOM">
+          <div class="carousel-item active">
+              <img src="${array[0].img}" class="d-block w-100" alt="${array[0].descripcion}">
+          </div>
+  
+      </div>
+  
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  `
+    let contenedorEventos = document.getElementById(`carruselDOM`)
+    array.forEach(eventos => {
+        contenedorEventos.innerHTML += `
+        <div class="carousel-item" id="event${eventos.item}" ->
+        <img src="${eventos.img}" class="d-block w-100" alt="${eventos.descripcion}">
+        </div>
+         `;
+
     }
-}
-let producto1 = new Productos (1,`Televisor 45"`,`LG`,`Televisores`,1500,25)
-let producto2 = new Productos (2,`Televisor 55"`,`Samsung`,`Televisores`,1800,20)
-let producto3 = new Productos (3,`Laptop 14"`,`LG`,`Laptop`,2800,15)
-let producto4 = new Productos (4,`Monitor`,`Samsung `,`Centro de computo`,480,250)
-let producto5 = new Productos (5,`Desktop Rayzen 5400"`,`Pavilion Gaming`,`Laptop`,6000,5)
-let producto6 = new Productos (6,`Desktop Rayzen 4400"`,`Pavilion Gaming`,`Laptop`,4500,55)
-
-
-ArrayProductos.push(producto1)
-ArrayProductos.push(producto2)
-ArrayProductos.push(producto3)
-ArrayProductos.push(producto4)
-ArrayProductos.push(producto5) 
-ArrayProductos.push(producto6)
-
-
-// Se declara funcion para iniciar las compras
-function inicioDeCompras() {
-    producto = Number(prompt(`Marque una de las siguientes opciones:\n1. ${producto1.descripcion} ${producto1.precio} \n2.  ${producto2.descripcion} ${producto2.precio} \n3.  ${producto3.descripcion} ${producto3.precio} \n4.  ${producto4.descripcion} ${producto4.precio} \n5. ${producto5.descripcion} ${producto5.precio} \n6. ${producto6.descripcion} ${producto6.precio}`))
-
+    )
 }
 
-// Se declara una función para tomar decisión al momento de realizar la primera compra
-function pregunta1raCompra() {
-    comprar = decision
-    producto = Number(prompt(`Marque una de las siguientes opciones:\n1. ${producto1.descripcion} ${producto1.precio} \n2.  ${producto2.descripcion} ${producto2.precio} \n3.  ${producto3.descripcion} ${producto3.precio} \n4.  ${producto4.descripcion} ${producto4.precio} \n5. ${producto5.descripcion} ${producto5.precio} \n6. ${producto6.descripcion} ${producto6.precio}`))
+//Pintamos los Entradas del Array en un 
+function cards(array) {
+    let parentElement = document.getElementById('cards');
+    array.forEach(array => {
+        // Crear un elemento div para cada entrada
+        let entryElement = document.createElement('div');
+        entryElement.classList.add('col');
+
+        // Generar el HTML para la entrada y asignarlo al elemento recién creado
+        entryElement.innerHTML = `
+    <div class="card">
+      <img src="${array.img}" class="card-img-top" alt="${array.descripcion}">
+      <div class="card-body">
+        <h1 class="cardtexto"><strong>${array.lugarDePresentacion} - ${array.provincia}</strong> </h1>
+        <h5 class="card-title text-success"><strong> ${array.descripcion}</strong></h5>
+        <p class="card-text">${array.fechaDePresentacion}</p>
+        <p class="card-text">${array.categoria}</p>
+        <button class="button" id = "btn${array.item}">#Agregar al Carrito</button>
+      </div>
+    </div>
+    `;
+        // Añadir el elemento recién creado al elemento padre
+        parentElement.appendChild(entryElement);
+
+        // Añadir un manejador de evento al botón dentro del elemento recién creado
+        let button = document.getElementById(`btn${array.item}`);
+        button.addEventListener('click', () => {
+            agregarAlCarrito(array.item);
+
+            Toastify({
+                text: "Producto Añadido al Carrito",
+                duration: 1000,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#09adad",
+                    width: "220px",
+                    fontSize: "14px",
+                    fontFamily: '"Roboto", sans-serif',
+                    fontWeight: "300",
+                    textAlign: "center",
+                    borderRadius: "50px",
+                },
+            }).showToast();
+        })
+    })
 }
-//Se declara una función arrow  para calcular el monto total y finalizar la compra
-const pregunta2daCompra = () => {
-    comprar = decision
-    alert(`Los productos adquiridos son: \n ${carrito} `)
-    alert(`El total de su compra es ${totalcompras} Soles. Muchas Gracias.\nVuelva Pronto!`)
-}
 
 
-// funcion para mostrar todos los articulos por marca
+//Eventos
 
-function Filtro (){
-let marcaProducto = prompt("Revise los productos que tenemos \nSamsung \nLG \nPavilion Gaming");
+verCarrito.addEventListener(`click`, () => {
+    mostrarCarrito();
+})
 
-ArrayProductos.forEach(function(product){
-    if (product.marca == marcaProducto){
-        alert("Id Producto: "+ product.id + " - Descripción: "+ product.descripcion + " - Marca: "+ product.marca + " - Categoría: "+ product.categoria + " - Precio: "+ product.precio + " - Stock: "+ product.stock)
-    }
-});
-}
+let carrito = [];
 
-
-
-
-
-//===========================================================================================================================
-//=                                                                                                                         =
-//=                                           INICIO DE LA APLICACION                                                       =
-//=                                                                                                                         =
-//===========================================================================================================================
-
-
-
-Filtro()
-inicioDeCompras()
-
-while (comprar == true) {
-    switch (producto) {
-        case 1:
-            carrito.push(producto1.descripcion)
-            totalcompras =  totalcompras + producto1.precio
-            break;
-        case 2:
-            carrito.push(producto2.descripcion)
-            totalcompras = totalcompras + producto2.precio
-            break;
-        case 3:
-            carrito.push(producto3.descripcion)
-            totalcompras = totalcompras +producto3.precio
-            break;
-        case 4:
-            carrito.push(producto4.descripcion)
-            totalcompras = totalcompras + producto4.precio
-            break;
-         case 5:
-            carrito.push(producto5.descripcion)
-            totalcompras = totalcompras + producto5.precio
-            break;
-        case 6:
-            carrito.push(producto6.descripcion)
-            totalcompras = totalcompras + producto6.precio
-                break;   
-        default:
-            producto = Number(prompt(
-                `Te equivocaste !!! \nMarque una de las siguientes opciones:\n1. ${producto1.descripcion} ${producto1.precio} \n2.  ${producto2.descripcion} ${producto2.precio} \n3.  ${producto3.descripcion} ${producto3.precio} \n4.  ${producto4.descripcion} ${producto4.precio} \n5. ${producto5.descripcion} ${producto5.precio} \n6. ${producto6.descripcion} ${producto6.precio}`))
-            continue;
-    }
-    decision = confirm(`Desea continuar comprando`)
-    decision == true ? pregunta1raCompra() : pregunta2daCompra();
+// Pruebas Lógicas
+if (localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+    mostrarCarrito();
 
 }
+
+
+function agregarAlCarrito(item) {
+    const productoEnCarrito = carrito.find(concierto => concierto.item === item);
+    productoEnCarrito
+      ? productoEnCarrito.cantidad++
+      : carrito.push(arrayEntradas.find(concierto => concierto.item === item));
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    console.log(carrito);
+    // calcularTotal();
+  }
+// });
+
+
+
+
+function mostrarCarrito() {
+
+    contenedorCarrito.innerHTML = ""
+  
+    carrito.forEach(concierto => {
+      const cardcarrito = document.getElementById(`contenedorCarrito`)
+      // cardcarrito.classList.add("card", "mb-3");
+      cardcarrito.innerHTML += `
+        <h2 class="card-header display-6 "><strong> ${concierto.descripcion} </strong></h2>
+        <div class="card-body">
+            <img src =${concierto.img} class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+  
+            <h5 class="card-title mt-5"> ${concierto.lugarDePresentacion} </h5>
+            <h6 class="card-subtitle text-muted mt-3"> ${concierto.fechaDePresentacion} </h6>
+            <div>
+                <div class="btn-group contenedorBotones mt-4" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary botonCarrito bti" id="menos${concierto.item}">-</button>
+                    <span class="contador"> ${concierto.cantidad} </span>
+                    <button type="button" class="btn btn-primary botonCarrito btd" id="mas${concierto.item}">+</button>
+  
+  
+                </div>
+                <br>
+                <h5 class="mt-3 "><a class="eliminar" href="">eliminar</a> </h5>
+            </div>
+        </div>`
+  
+  
+      //Eliminar productos del carrito:
+  
+      // const boton = document.getElementById(`eliminar${concierto.item}`);
+      // boton.addEventListener("click", () => {
+      //   eliminarDelCarrito(concierto.item);
+      //  })
+    })
+    // calcularTotal();
+  }
+  
+  verCarrito.addEventListener(`click`, () => {
+    mostrarCarrito();
+  })
