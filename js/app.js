@@ -1,7 +1,7 @@
 /*Fetch para importar la base de datos de los elementos que se usaran en el carrusel
 y en las cards que se imprimirann en el DOM */
 
-let bdata = "../json/datos.json";
+let bdata = "json/datos.json";
 let arrayEntradas = [];
 let cantidad = { cantidad: 1 }
 
