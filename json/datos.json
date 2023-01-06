@@ -8,7 +8,7 @@
     "fechaDePresentacion": "16/03/2023",
     "stock": "5000",
     "precio": "450",
-    "img": "../images/ics031_calugalistado.jpg"
+    "img": "images/ics031_calugalistado.jpg"
 },
 {
     "item": "2",
@@ -19,7 +19,7 @@
     "fechaDePresentacion": "11/02/2023",
     "stock": "3000",
     "precio": "180",
-    "img": "../images/ics030_calugalistado.jpg"
+    "img": "images/ics030_calugalistado.jpg"
 },
 {
     "item": "3",
@@ -30,7 +30,7 @@
     "fechaDePresentacion": "28/01/2023",
     "stock": "7000",
     "precio": "150",
-    "img": "../images/xhl001_re_banner.jpg"
+    "img": "images/xhl001_re_banner.jpg"
 },
 {
     "item": "4",
@@ -41,7 +41,7 @@
     "fechaDePresentacion": "31/12/2023",
     "stock": "2000",
     "precio": "129",
-    "img": "../images/pmp002_re_banner.jpg"
+    "img": "images/pmp002_re_banner.jpg"
 },
 
 {
@@ -53,7 +53,7 @@
     "fechaDePresentacion": "31/12/2022",
     "stock": "2500",
     "precio": "200",
-    "img": "../images/neo002_re_banner.jpg"
+    "img": "images/neo002_re_banner.jpg"
 },
 {
     "item": "6",
@@ -64,7 +64,7 @@
     "fechaDePresentacion": "26/01/2023",
     "stock": "250",
     "precio": "45",
-    "img": "../images/vep004_re_banner.jpg"
+    "img": "images/vep004_re_banner.jpg"
 },
 {
     "item": "7",
@@ -75,7 +75,7 @@
     "fechaDePresentacion": "31/12/2022",
     "stock": "4000",
     "precio": "250",
-    "img": "../images/rdv001v2_re_banner.jpg"
+    "img": "images/rdv001v2_re_banner.jpg"
 },
 {
     "item": "8",
@@ -86,7 +86,7 @@
     "fechaDePresentacion": "17/01/2023",
     "stock": "450",
     "precio": "180",
-    "img": "../images/wam030_re_banner.jpg"
+    "img": "images/wam030_re_banner.jpg"
 },
 {
     "item": "9",
@@ -97,7 +97,7 @@
     "fechaDePresentacion": "31/12/2022",
     "stock": "900",
     "precio": "299",
-    "img": "../images/tab001_lg_1_2_banner.jpg"
+    "img": "images/tab001_lg_1_2_banner.jpg"
 },
 {
     "item": "10",
@@ -108,7 +108,7 @@
     "fechaDePresentacion": "14/02/2022",
     "stock": "900",
     "precio": "899",
-    "img": "../images/Logo_Added_Romeo-generic-670x360-web_2.jpg"
+    "img": "images/Logo_Added_Romeo-generic-670x360-web_2.jpg"
 }
 
 ]
