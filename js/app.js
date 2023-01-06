@@ -20,7 +20,7 @@ fetch(bdata)
         cardsDOM()
 
     })
-    .catch(error => console.error(error))
+    .catch(error => console.log(error))
 
 
 // Funcion para llamar a un carrusel
