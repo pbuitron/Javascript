@@ -207,6 +207,23 @@ const aumenta = (item) => {
         cantidad.innerHTML = acumulador
         localStorage.setItem("carrito", JSON.stringify(carrito));
     }
+    Toastify({
+        text: "Producto Añadido",
+        duration: 1200,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+
+            width: "20%",
+            fontSize: "1.1rem",
+            fontFamily: '"Roboto", sans-serif',
+            fontWeight: "500",
+            textAlign: "center",
+            borderRadius: "1.2rem",
+            background: "#004d7a",
+        },
+    }).showToast();
     mostrarCarrito(carrito)
 }
 
@@ -216,13 +233,30 @@ const reduce = (item) => {
         const acumulador = entradaEnCarrito.cantidad--
         if (acumulador <= 1) {
             eliminaritem(item);
+            
         } else {
             const cantidad = document.querySelector(".cantidad");
             cantidad.innerHTML = acumulador
             contenedorCarrito.appendChild(cantidad);
             localStorage.setItem("carrito", JSON.stringify(carrito));
         }
-    }
+    }Toastify({
+        text: "Producto eliminado",
+        duration: 1200,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+
+            width: "20%",
+            fontSize: "1.1rem",
+            fontFamily: '"Roboto", sans-serif',
+            fontWeight: "500",
+            textAlign: "center",
+            borderRadius: "1.2rem",
+            background: "#004d7a",
+        },
+    }).showToast();
     mostrarCarrito(carrito)
 }
 
