@@ -99,7 +99,7 @@ function cardsDOM() {
                 position: "right",
                 stopOnFocus: true,
                 style: {
-                    
+
                     width: "20%",
                     fontSize: "1.1rem",
                     fontFamily: '"Roboto", sans-serif',
@@ -113,20 +113,20 @@ function cardsDOM() {
     })
 }
 
-let carrito = []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-if(localStorage.getItem("carrito")) {
+if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));
     mostrarCarrito(carrito);
 }
 
 // funcion para añadir elementos al array carrito.
-function agregarAlCarrito(item){
-    const productoEnCarrito =  carrito.find(concierto => concierto.item === item);
-    if(productoEnCarrito){
+function agregarAlCarrito(item) {
+    const productoEnCarrito = carrito.find(concierto => concierto.item === item);
+    if (productoEnCarrito) {
         productoEnCarrito.cantidad++;
         localStorage.setItem("carrito", JSON.stringify(carrito));
-    }else{
+    } else {
         const producto = arrayEntradas.find(concierto => concierto.item === item);
         producto.cantidad = 1
         carrito.push(producto);
@@ -138,14 +138,17 @@ function agregarAlCarrito(item){
 
 };
 
-function mostrarCarrito() {
+function mostrarCarrito(carrito) {
 
     contenedorCarrito.innerHTML = ""
-  
+
     carrito.forEach(concierto => {
-      const cardcarrito = document.getElementById(`contenedorCarrito`)
-      // cardcarrito.classList.add("card", "mb-3");
-      cardcarrito.innerHTML += `
+
+        const cardCarrito = document.createElement("div");
+        cardCarrito.classList.add("contenedor-carrito-hijo");
+        cardCarrito.innerHTML =
+            // cardcarrito.classList.add("card", "mb-3");
+            `
         <h2 class="card-header display-6 "><strong> ${concierto.descripcion} </strong></h2>
         <div class="card-body">
             <img src =${concierto.img} class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
@@ -158,29 +161,83 @@ function mostrarCarrito() {
             <div>
                 <div class="btn-group contenedorBotones mt-4" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-primary botonCarrito bti" id="menos${concierto.item}">-</button>
-                    <span class="contador"> ${concierto.cantidad} </span>
+                    <span class="contador cantidad"> ${concierto.cantidad} </span>
                     <button type="button" class="btn btn-primary botonCarrito btd" id="mas${concierto.item}">+</button>
                     
         
                 </div>
                 
-                <h5 class="card-title mt-3"> Total S/. ${concierto.cantidad * concierto.precio} </h5>
+                <h5 class="card-title mt-3 "> Total S/. ${concierto.cantidad * concierto.precio} </h5>
                 
                 <br>
-                <h5 class="mt-3 "><a class="eliminar" href="">eliminar</a> </h5>
+                <h5 class="mt-3 "><a class="eliminar" id="eliminar${concierto.item}" href="">eliminar</a> </h5>
             </div>
         </div>
         `;
-        
-  
-  
-      //Eliminar productos del carrito:
-  
-      // const boton = document.getElementById(`eliminar${concierto.item}`);
-      // boton.addEventListener("click", () => {
-      //   eliminarDelCarrito(concierto.item);
-      //  })
+        contenedorCarrito.appendChild(cardCarrito);
+
+
+        const aumentar = document.getElementById(`mas${concierto.item}`)
+        aumentar.addEventListener(`click`, () => {
+            aumenta(concierto.item)
+        });
+
+
+        const reducir = document.getElementById(`menos${concierto.item}`);
+        reducir.addEventListener(`click`, () => {
+            reduce(concierto.item)
+        })
+
+
+
+        //Eliminar productos del carrito:
+
+        const eliminar = document.getElementById(`eliminar${concierto.item}`);
+        eliminar.addEventListener("click", () => {
+            eliminarDelCarrito(concierto.item);
+        })
     })
     // calcularTotal();
-  }
+}
+const aumenta = (item) => {
+    const entradaEnCarrito = carrito.find(entrada => entrada.item === item);
+    if (entradaEnCarrito) {
+        const acumulador = entradaEnCarrito.cantidad++
+        const cantidad = document.querySelector(".contador");
+        cantidad.innerHTML = acumulador
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+    mostrarCarrito(carrito)
+}
 
+const reduce = (item) => {
+    const entradaEnCarrito = carrito.find(entrada => entrada.item === item);
+    if (entradaEnCarrito) {
+        const acumulador = entradaEnCarrito.cantidad--
+        if (acumulador <= 1) {
+            eliminaritem(item);
+        } else {
+            const cantidad = document.querySelector(".cantidad");
+            cantidad.innerHTML = acumulador
+            contenedorCarrito.appendChild(cantidad);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+    }
+    mostrarCarrito(carrito)
+}
+
+const eliminaritem = (item) => {
+    const entrada = carrito.find(entrada => entrada.item === item);
+    const indice = carrito.indexOf(entrada);
+    carrito.splice(indice, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito(carrito);
+}
+
+const eliminarDelCarrito = (item) => {
+    const entrada = carrito.find(entrada => entrada.item === item);
+    const indice = carrito.indexOf(entrada);
+    carrito.splice(indice, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito(carrito);
+}
