@@ -281,7 +281,6 @@ const eliminarDelCarrito = (item) => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     
     mostrarCarrito(carrito);
-<<<<<<< HEAD
     
 
 }
@@ -316,7 +315,4 @@ function calcularTotal(){
 }
 
 
-console.log(carrito)
-=======
-}
->>>>>>> e4eeb0e414df10698f0c23d8f40ca3df278f32cd
+
