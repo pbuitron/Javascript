@@ -275,7 +275,7 @@ const eliminarDelCarrito = (item) => {
 
 
     const entrada = carrito.find(entrada => entrada.item === item);
-    const indice = carrito.indexOf(entrada);
+   const indice = carrito.indexOf(entrada);
     
     carrito.splice(indice, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
