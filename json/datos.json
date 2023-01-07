@@ -1,112 +1,114 @@
 [
-    {
-        "item": 1,
-        "descripcion": "Camilo en Lima",
-        "lugarDePresentacion": "Estadio Nacional",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "16/03/2023",
-        "stock": 5000,
-        "precio": 450,
-        "img": "images/ics031_calugalistado.jpg"
-    },
-    {
-        "item": 2,
-        "descripcion": "Super Junior en Lima",
-        "lugarDePresentacion": "Estadio San Marcos",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "11/02/2023",
-        "stock": 3000,
-        "precio": 180,
-        "img": "images/ics030_calugalistado.jpg"
-    },
-    {
-        "item": 3,
-        "descripcion": "X FestiRock Nacional Ayacucho 2023",
-        "lugarDePresentacion": "Millwa Country Club",
-        "provincia": "Ayacucho",
-        "categoria": "Música",
-        "fechaDePresentacion": "28/01/2023",
-        "stock": 7000,
-        "precio": 150,
-        "img": "images/xhl001_re_banner.jpg"
-    },
-    {
-        "item": 4,
-        "descripcion": "Super Tono Noventero",
-        "lugarDePresentacion": "Discoteca Coco - Lince",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "31/12/2023",
-        "stock": 2000,
-        "precio": 129,
-        "img": "images/pmp002_re_banner.jpg"
-    },
-    {
-        "item": 5,
-        "descripcion": "Agua Marina en Club Kenko",
-        "lugarDePresentacion": "Club Kenko",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "31/12/2022",
-        "stock": 2500,
-        "precio": 200,
-        "img": "images/neo002_re_banner.jpg"
-    },
-    {
-        "item": 6,
-        "descripcion": "Encanto Live en Cajamarca",
-        "lugarDePresentacion": "Centro de Convenciones",
-        "provincia": "Cajamarca",
-        "categoria": "Música",
-        "fechaDePresentacion": "26/01/2023",
-        "stock": 250,
-        "precio": 45,
-        "img": "images/vep004_re_banner.jpg"
-    },
-    {
-        "item": 7,
-        "descripcion": "La Mejor Fiesta de Año Nuevo 2023",
-        "lugarDePresentacion": "Circulo Militar de Jesus Maria",
-        "provincia": "Lima",
-        "categoria": "Familia",
-        "fechaDePresentacion": "31/12/2022",
-        "stock": 4000,
-        "precio": 250,
-        "img": "images/rdv001v2_re_banner.jpg"
-    },
-    {
-        "item": 8,
-        "descripcion": "Celebramos el Día de la Guitarra",
-        "lugarDePresentacion": "Jazz Zone - Miraflores",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "17/01/2023",
-        "stock": 450,
-        "precio": 180,
-        "img": "images/wam030_re_banner.jpg"
-    },
-    {
-        "item": 9,
-        "descripcion": "Open Party",
-        "lugarDePresentacion": "Hacienda Don Jesus",
-        "provincia": "Cuzco",
-        "categoria": "Familia",
-        "fechaDePresentacion": "31/12/2022",
-        "stock": 900,
-        "precio": 299,
-        "img": "images/tab001_lg_1_2_banner.jpg"
-    },
-    {
-        "item": 10,
-        "descripcion": "Romeo Santos en Lima",
-        "lugarDePresentacion": "Jockey Club del Perú",
-        "provincia": "Lima",
-        "categoria": "Música",
-        "fechaDePresentacion": "14/02/2022",
-        "stock": 900,
-        "precio": 899,
-        "img": "images/Logo_Added_Romeo-generic-670x360-web_2.jpg"
-    }
+{
+    "item": "1",
+    "descripcion": "Camilo en Lima",
+    "lugarDePresentacion": "Estadio Nacional",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "16/03/2023",
+    "stock": "5000",
+    "precio": "450",
+    "img": "../images/ics031_calugalistado.jpg"
+},
+{
+    "item": "2",
+    "descripcion": "Super Junior en Lima",
+    "lugarDePresentacion": "Estadio San Marcos",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "11/02/2023",
+    "stock": "3000",
+    "precio": "180",
+    "img": "../images/ics030_calugalistado.jpg"
+},
+{
+    "item": "3",
+    "descripcion": "X FestiRock Nacional Ayacucho 2023",
+    "lugarDePresentacion": "Millwa Country Club",
+    "provincia": "Ayacucho",
+    "categoria": "Música",
+    "fechaDePresentacion": "28/01/2023",
+    "stock": "7000",
+    "precio": "150",
+    "img": "../images/xhl001_re_banner.jpg"
+},
+{
+    "item": "4",
+    "descripcion": "Super Tono Noventero",
+    "lugarDePresentacion": "Discoteca Coco - Lince",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "31/12/2023",
+    "stock": "2000",
+    "precio": "129",
+    "img": "../images/pmp002_re_banner.jpg"
+},
+
+{
+    "item": "5",
+    "descripcion": "Agua Marina en Club Kenko",
+    "lugarDePresentacion": "Club Kenko",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "31/12/2022",
+    "stock": "2500",
+    "precio": "200",
+    "img": "../images/neo002_re_banner.jpg"
+},
+{
+    "item": "6",
+    "descripcion": "Encanto Live en Cajamarca",
+    "lugarDePresentacion": "Centro de Convenciones",
+    "provincia": "Cajamarca",
+    "categoria": "Música",
+    "fechaDePresentacion": "26/01/2023",
+    "stock": "250",
+    "precio": "45",
+    "img": "../images/vep004_re_banner.jpg"
+},
+{
+    "item": "7",
+    "descripcion": "La Mejor Fiesta de Año Nuevo 2023",
+    "lugarDePresentacion": "Circulo Militar de Jesus Maria",
+    "provincia": "Lima",
+    "categoria": "Familia",
+    "fechaDePresentacion": "31/12/2022",
+    "stock": "4000",
+    "precio": "250",
+    "img": "../images/rdv001v2_re_banner.jpg"
+},
+{
+    "item": "8",
+    "descripcion": "Celebramos el Día de la Guitarra",
+    "lugarDePresentacion": "Jazz Zone - Miraflores",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "17/01/2023",
+    "stock": "450",
+    "precio": "180",
+    "img": "../images/wam030_re_banner.jpg"
+},
+{
+    "item": "9",
+    "descripcion": "Open Party",
+    "lugarDePresentacion": "Hacienda Don Jesus",
+    "provincia": "Cuzco",
+    "categoria": "Familia",
+    "fechaDePresentacion": "31/12/2022",
+    "stock": "900",
+    "precio": "299",
+    "img": "../images/tab001_lg_1_2_banner.jpg"
+},
+{
+    "item": "10",
+    "descripcion": "Romeo Santos en Lima",
+    "lugarDePresentacion": "Jockey Club del Perú",
+    "provincia": "Lima",
+    "categoria": "Música",
+    "fechaDePresentacion": "14/02/2022",
+    "stock": "900",
+    "precio": "899",
+    "img": "../images/Logo_Added_Romeo-generic-670x360-web_2.jpg"
+}
+
 ]
