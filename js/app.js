@@ -83,8 +83,10 @@ function cardsDOM() {
           <h5 class="card-title text-success"><strong> ${conciertos.descripcion}</strong></h5>
           <p class="card-text">${conciertos.fechaDePresentacion}</p>
           <p class="card-text">${conciertos.categoria}</p>
-          <button class="button" id = "btn${conciertos.item}">#Agregar al Carrito</button>
-        </div>
+          
+          <button class="button" id = "btn${conciertos.item}">Agregar al Carrito</button>
+          
+          </div>
       </div>
         `;
         contenedorPadre.appendChild(contenedorCards);
@@ -194,13 +196,13 @@ function mostrarCarrito(carrito) {
         //Eliminar productos del carrito:
 
         const eliminar = document.getElementById(`eliminar${concierto.item}`);
-        
+
         eliminar.addEventListener("click", () => {
-            
-          eliminarDelCarrito(concierto.item);
+
+            eliminarDelCarrito(concierto.item);
         })
     })
-   calcularTotal();
+    calcularTotal();
 }
 const aumenta = (item) => {
     const entradaEnCarrito = carrito.find(entrada => entrada.item === item);
@@ -275,23 +277,23 @@ const eliminarDelCarrito = (item) => {
 
 
     const entrada = carrito.find(entrada => entrada.item === item);
-   const indice = carrito.indexOf(entrada);
-    
+    const indice = carrito.indexOf(entrada);
+
     carrito.splice(indice, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    
+
     mostrarCarrito(carrito);
-    
+
 
 }
 
-function calcularTotal(){
+function calcularTotal() {
     const PrintSubtotal = document.querySelector(`.subtotal`);
     const PrintIgv = document.querySelector(`.igv`)
-    const PrintTotal =document.querySelector(`.totalVenta`)
+    const PrintTotal = document.querySelector(`.totalVenta`)
 
     // Se calcula el total de cada producto en el carrito
-    carrito.forEach((producto) =>{
+    carrito.forEach((producto) => {
         producto.total = producto.cantidad * producto.precio
     });
 
@@ -307,12 +309,29 @@ function calcularTotal(){
     const precioVentaRedondeado = Number(precioVenta.toFixed(2)); // se redondea el precio de venta a 2 decimales
 
     console.log(subtotalRedondeado, igvRedondeado, precioVentaRedondeado);
-    
+
     PrintSubtotal.innerHTML = `S/. ${subtotal}`;
     PrintIgv.innerHTML = `S/. ${igvRedondeado}`;
     PrintTotal.innerHTML = `S/. ${precioVentaRedondeado}`
 
 }
 
-
-
+const nuevaPromesa = new Promise((resolve, reject) => {
+    
+    const mensajeFlotante = document.getElementById("mensaje-flotante");
+    mensajeFlotante.style.display = "block";
+  
+        setTimeout(() => {
+      mensajeFlotante.style.display = "none";
+      resolve();
+    }, 10000);
+  });
+  
+  nuevaPromesa.then(() => {
+    console.log("Solicitud de aprobación completa");
+  });
+  
+  nuevaPromesa.catch((error) => {
+    console.error(error);
+  });
+  
