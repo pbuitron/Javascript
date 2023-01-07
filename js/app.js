@@ -1,7 +1,7 @@
 /*Fetch para importar la base de datos de los elementos que se usaran en el carrusel
 y en las cards que se imprimirann en el DOM */
 
-let bdata = "../json/datos.json";
+let bdata = "json/datos.json";
 let arrayEntradas = [];
 let cantidad = { cantidad: 1 }
 
@@ -20,7 +20,7 @@ fetch(bdata)
         cardsDOM()
 
     })
-    .catch(error => console.log(error))
+    .catch(error => console.error(error))
 
 
 // Funcion para llamar a un carrusel
@@ -66,7 +66,7 @@ function cambiarSlide() {
     let siguienteElemento = document.getElementById(`event${arrayEntradas[indiceActual].item}`);
     elementoActual.classList.remove('active');
     siguienteElemento.classList.add('active');
-    setTimeout(cambiarSlide, 3000);
+    setTimeout(cambiarSlide, 1000);
 }
 
 function cardsDOM() {
@@ -140,10 +140,10 @@ function agregarAlCarrito(item) {
 
 function mostrarCarrito(carrito) {
 
-    contenedorCarrito.innerHTML = ""
+    contenedorCarrito.innerHTML = " "
 
     carrito.forEach(concierto => {
-
+        let acumulador = concierto.cantidad * concierto.precio;
         const cardCarrito = document.createElement("div");
         cardCarrito.classList.add("contenedor-carrito-hijo");
         cardCarrito.innerHTML =
@@ -151,7 +151,7 @@ function mostrarCarrito(carrito) {
             `
         <h2 class="card-header display-6 "><strong> ${concierto.descripcion} </strong></h2>
         <div class="card-body">
-            <img src =${concierto.img} class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+            <img src = ${concierto.img} class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
   
             <h5 class="card-title mt-5"> ${concierto.lugarDePresentacion} </h5>
             <h6 class="card-subtitle text-muted mt-3"> ${concierto.fechaDePresentacion} </h6>
@@ -159,45 +159,48 @@ function mostrarCarrito(carrito) {
             
             
             <div>
-                <div class="btn-group contenedorBotones mt-4" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary botonCarrito bti" id="menos${concierto.item}">-</button>
+                <div class="btn-group contenedor-botones mt-4" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary boton-carrito bti" id="menos${concierto.item}">-</button>
                     <span class="contador cantidad"> ${concierto.cantidad} </span>
-                    <button type="button" class="btn btn-primary botonCarrito btd" id="mas${concierto.item}">+</button>
+                    <button type="button" class="btn btn-primary boton-carrito btd" id="mas${concierto.item}">+</button>
                     
         
                 </div>
                 
-                <h5 class="card-title mt-3 "> Total S/. ${concierto.cantidad * concierto.precio} </h5>
+                <h5 class="card-title mt-3 "> Total S/. ${acumulador} </h5>
                 
                 <br>
-                <h5 class="mt-3 "><a class="eliminar" id="eliminar${concierto.item}" href="">eliminar</a> </h5>
+                <h5 class="mt-3 ">
+                <button type="button" class="btn btn-danger btd" id="eliminar${concierto.item}">Eliminar</button>
+                
+                </h5>
             </div>
         </div>
         `;
         contenedorCarrito.appendChild(cardCarrito);
 
-
+        //Aumenta Item dentro del carrito
         const aumentar = document.getElementById(`mas${concierto.item}`)
         aumentar.addEventListener(`click`, () => {
             aumenta(concierto.item)
         });
 
-
+        //Quita items dentro del carrito
         const reducir = document.getElementById(`menos${concierto.item}`);
         reducir.addEventListener(`click`, () => {
             reduce(concierto.item)
         })
 
-
-
         //Eliminar productos del carrito:
 
         const eliminar = document.getElementById(`eliminar${concierto.item}`);
+        
         eliminar.addEventListener("click", () => {
-            eliminarDelCarrito(concierto.item);
+            
+          eliminarDelCarrito(concierto.item);
         })
     })
-    // calcularTotal();
+   calcularTotal();
 }
 const aumenta = (item) => {
     const entradaEnCarrito = carrito.find(entrada => entrada.item === item);
@@ -233,14 +236,14 @@ const reduce = (item) => {
         const acumulador = entradaEnCarrito.cantidad--
         if (acumulador <= 1) {
             eliminaritem(item);
-            
+
         } else {
             const cantidad = document.querySelector(".cantidad");
             cantidad.innerHTML = acumulador
             contenedorCarrito.appendChild(cantidad);
             localStorage.setItem("carrito", JSON.stringify(carrito));
         }
-    }Toastify({
+    } Toastify({
         text: "Producto eliminado",
         duration: 1200,
         gravity: "top",
@@ -269,9 +272,47 @@ const eliminaritem = (item) => {
 }
 
 const eliminarDelCarrito = (item) => {
+
+
     const entrada = carrito.find(entrada => entrada.item === item);
     const indice = carrito.indexOf(entrada);
+    
     carrito.splice(indice, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    
     mostrarCarrito(carrito);
+    
+
 }
+
+function calcularTotal(){
+    const PrintSubtotal = document.querySelector(`.subtotal`);
+    const PrintIgv = document.querySelector(`.igv`)
+    const PrintTotal =document.querySelector(`.totalVenta`)
+
+    // Se calcula el total de cada producto en el carrito
+    carrito.forEach((producto) =>{
+        producto.total = producto.cantidad * producto.precio
+    });
+
+    // Se calcula el total de todos los productos en el carrito
+    const subtotal = carrito.reduce((acumulador, producto) => acumulador + producto.total, 0);
+    const subtotalRedondeado = Number(subtotal.toFixed(2))
+    // Se calcula el impuesto sobre el valor agregado (IGV)
+    const igv = subtotal * 0.18;
+    const igvRedondeado = Number(igv.toFixed(2)); // se redondea el IGV a 2 decimales
+
+    // Se calcula el precio de venta sumando el subtotal al total
+    const precioVenta = igvRedondeado + subtotal;
+    const precioVentaRedondeado = Number(precioVenta.toFixed(2)); // se redondea el precio de venta a 2 decimales
+
+    console.log(subtotalRedondeado, igvRedondeado, precioVentaRedondeado);
+    
+    PrintSubtotal.innerHTML = `S/. ${subtotal}`;
+    PrintIgv.innerHTML = `S/. ${igvRedondeado}`;
+    PrintTotal.innerHTML = `S/. ${precioVentaRedondeado}`
+
+}
+
+
+console.log(carrito)
