@@ -13,18 +13,14 @@ fetch(bdata)
         arrayEntradas.forEach((elemento) => {
             elemento = Object.assign(elemento, cantidad)
         })
-
         console.log(arrayEntradas);
         carrusel()
         cambiarSlide()
         cardsDOM()
-
     })
     .catch(error => console.error(error))
 
-
 // Funcion para llamar a un carrusel
-
 function carrusel() {
     let carrusel = document.getElementById(`carrusel`)
     carrusel.innerHTML = `
@@ -117,10 +113,8 @@ function cardsDOM() {
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-if (localStorage.getItem("carrito")) {
-    carrito = JSON.parse(localStorage.getItem("carrito"));
-    mostrarCarrito(carrito);
-}
+localStorage.getItem("carrito") ? carrito = JSON.parse(localStorage.getItem("carrito")) : null;
+mostrarCarrito(carrito);
 
 // funcion para añadir elementos al array carrito.
 function agregarAlCarrito(item) {
@@ -136,9 +130,8 @@ function agregarAlCarrito(item) {
     }
     //costoTotal()
     mostrarCarrito(carrito);
-
-
 };
+
 
 function mostrarCarrito(carrito) {
 
